@@ -1,21 +1,31 @@
-package webminds.group.pet_backend.services.Client.dto;
+package webminds.group.pet_backend.domain.authUser;
 
-import jakarta.validation.constraints.AssertTrue;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-public class AuthUserCreationDto {
+@Entity
+public class AuthUser {
 
-    @Size(min = 3, max = 10)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
 
-    @Email
     private String email;
 
-    @Size(min = 6, max = 20)
     private String password;
 
-    private short userType;
+    private Short userType;
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Short getUserType() {
         return userType;

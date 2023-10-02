@@ -20,7 +20,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import webminds.group.pet_backend.api.configuration.security.jwt.ManagerTokenJwt;
-import webminds.group.pet_backend.services.Client.authentication.AuthenticationUserService;
+import webminds.group.pet_backend.services.authUser.authentication.AuthenticationUserService;
 
 import java.util.Arrays;
 import java.util.List;

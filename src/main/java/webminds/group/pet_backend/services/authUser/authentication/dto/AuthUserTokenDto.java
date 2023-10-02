@@ -1,4 +1,4 @@
-package webminds.group.pet_backend.services.Client.authentication.dto;
+package webminds.group.pet_backend.services.authUser.authentication.dto;
 
 public class AuthUserTokenDto {
 

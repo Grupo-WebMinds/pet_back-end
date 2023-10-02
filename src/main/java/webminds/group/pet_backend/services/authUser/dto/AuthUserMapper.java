@@ -1,7 +1,7 @@
-package webminds.group.pet_backend.services.Client.dto;
+package webminds.group.pet_backend.services.authUser.dto;
 
-import webminds.group.pet_backend.domain.client.AuthUser;
-import webminds.group.pet_backend.services.Client.authentication.dto.AuthUserTokenDto;
+import webminds.group.pet_backend.domain.authUser.AuthUser;
+import webminds.group.pet_backend.services.authUser.authentication.dto.AuthUserTokenDto;
 
 public class AuthUserMapper {
 

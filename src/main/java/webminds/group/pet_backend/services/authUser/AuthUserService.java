@@ -1,4 +1,4 @@
-package webminds.group.pet_backend.services.Client;
+package webminds.group.pet_backend.services.authUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,12 +9,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import webminds.group.pet_backend.api.configuration.security.jwt.ManagerTokenJwt;
-import webminds.group.pet_backend.domain.client.AuthUser;
-import webminds.group.pet_backend.domain.client.repositories.AuthUserRepository;
-import webminds.group.pet_backend.services.Client.authentication.dto.AuthUserLoginDto;
-import webminds.group.pet_backend.services.Client.authentication.dto.AuthUserTokenDto;
-import webminds.group.pet_backend.services.Client.dto.AuthUserCreationDto;
-import webminds.group.pet_backend.services.Client.dto.AuthUserMapper;
+import webminds.group.pet_backend.domain.authUser.AuthUser;
+import webminds.group.pet_backend.domain.authUser.repositories.AuthUserRepository;
+import webminds.group.pet_backend.services.authUser.authentication.dto.AuthUserLoginDto;
+import webminds.group.pet_backend.services.authUser.authentication.dto.AuthUserTokenDto;
+import webminds.group.pet_backend.services.authUser.dto.AuthUserCreationDto;
+import webminds.group.pet_backend.services.authUser.dto.AuthUserMapper;
 
 @Service
 public class AuthUserService {

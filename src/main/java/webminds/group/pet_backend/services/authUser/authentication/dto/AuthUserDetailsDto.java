@@ -1,8 +1,8 @@
-package webminds.group.pet_backend.services.Client.authentication.dto;
+package webminds.group.pet_backend.services.authUser.authentication.dto;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import webminds.group.pet_backend.domain.client.AuthUser;
+import webminds.group.pet_backend.domain.authUser.AuthUser;
 
 import java.util.Collection;
 

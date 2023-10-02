@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import webminds.group.pet_backend.services.Client.AuthUserService;
-import webminds.group.pet_backend.services.Client.authentication.dto.AuthUserLoginDto;
-import webminds.group.pet_backend.services.Client.authentication.dto.AuthUserTokenDto;
-import webminds.group.pet_backend.services.Client.dto.AuthUserCreationDto;
+import webminds.group.pet_backend.services.authUser.AuthUserService;
+import webminds.group.pet_backend.services.authUser.authentication.dto.AuthUserLoginDto;
+import webminds.group.pet_backend.services.authUser.authentication.dto.AuthUserTokenDto;
+import webminds.group.pet_backend.services.authUser.dto.AuthUserCreationDto;
 
 @RestController
 @RequestMapping("/usuarios")
