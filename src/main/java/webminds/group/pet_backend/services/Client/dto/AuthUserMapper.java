@@ -11,6 +11,7 @@ public class AuthUserMapper {
         authUser.setEmail(authUserCreationDto.getEmail());
         authUser.setName(authUserCreationDto.getName());
         authUser.setPassword(authUserCreationDto.getPassword());
+        authUser.setUserType(authUserCreationDto.getUserType());
 
         return authUser;
     }
@@ -21,6 +22,7 @@ public class AuthUserMapper {
         authUserTokenDto.setUserId(authUser.getId());
         authUserTokenDto.setEmail(authUser.getEmail());
         authUserTokenDto.setName(authUser.getName());
+        authUserTokenDto.setUserType(authUser.getUserType());
         authUserTokenDto.setToken(token);
 
         return authUserTokenDto;
