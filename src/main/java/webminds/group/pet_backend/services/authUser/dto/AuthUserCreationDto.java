@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 
 public class AuthUserCreationDto {
 
-    @Size(min = 3, max = 10)
+    @Size(min = 3, max = 255)
     private String name;
 
     @Email

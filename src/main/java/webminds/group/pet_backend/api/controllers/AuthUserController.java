@@ -22,7 +22,7 @@ public class AuthUserController {
 
     @PostMapping
     @SecurityRequirement(name = "Bearer")
-    public ResponseEntity<Void> criar(@RequestBody @Valid AuthUserCreationDto authUserCreationDto) {
+    public ResponseEntity<Void> create(@RequestBody @Valid AuthUserCreationDto authUserCreationDto) {
         this.authUserService.create(authUserCreationDto);
         return ResponseEntity.status(201).build();
     }
