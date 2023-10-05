@@ -1,9 +1,12 @@
 package webminds.group.pet_backend.services.pet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import webminds.group.pet_backend.domain.pet.Pet;
 import webminds.group.pet_backend.domain.pet.repositories.PetRepository;
+import webminds.group.pet_backend.exception.UserNotFound;
 import webminds.group.pet_backend.services.pet.dto.PetCreationDto;
 import webminds.group.pet_backend.services.pet.dto.PetDTO;
 import webminds.group.pet_backend.services.pet.dto.PetMapper;
@@ -30,15 +33,10 @@ public class PetService {
         return pets;
     }
 
-    public PetDTO getById(Long id) {
+    public Pet getById(Long id) {
 
-        Optional<Pet> petOpt = this.petRepository.findById(id);
-
-        if(petOpt.isPresent()){
-            Pet petBanco = petOpt.get();
-            return PetMapper.ofDTO(petBanco);
-        }
-        return null;
+        return this.petRepository.findById(id).
+                orElseThrow(() -> new UserNotFound("User", id));
     }
 
     public boolean delete(Long id){
