@@ -22,15 +22,15 @@ public class PetController {
     @GetMapping
     public ResponseEntity<List<Pet>> get(){
         List<Pet> pet = this.petService.get();
-        if (pet == null){
-            return ResponseEntity.notFound().build();
+        if (pet.isEmpty()){
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(pet);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PetDTO> getById(@PathVariable Long id){
-        PetDTO pets = this.petService.getById(id);
+    public ResponseEntity<Pet> getById(@PathVariable Long id){
+        Pet pets = this.petService.getById(id);
         if(pets == null){
             return ResponseEntity.status(204).build();
         }
