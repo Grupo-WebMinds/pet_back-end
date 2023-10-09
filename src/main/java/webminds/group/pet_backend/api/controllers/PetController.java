@@ -20,8 +20,8 @@ public class PetController {
     private PetService petService;
 
     @GetMapping
-    public ResponseEntity<List<Pet>> get(){
-        List<Pet> pet = this.petService.get();
+    public ResponseEntity<List<PetDTO>> get(){
+        List<PetDTO> pet = this.petService.get();
         if (pet.isEmpty()){
             return ResponseEntity.noContent().build();
         }
@@ -29,8 +29,8 @@ public class PetController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pet> getById(@PathVariable Long id){
-        Pet pets = this.petService.getById(id);
+    public ResponseEntity<PetDTO> getById(@PathVariable Long id){
+        PetDTO pets = this.petService.getById(id);
         if(pets == null){
             return ResponseEntity.status(204).build();
         }
@@ -38,8 +38,8 @@ public class PetController {
     }
 
     @PostMapping
-    public ResponseEntity<Pet> create(@RequestBody @Valid PetCreationDto petCreationDto){
-        Pet pet = this.petService.create(petCreationDto);
+    public ResponseEntity<PetDTO> create(@RequestBody @Valid PetCreationDto petCreationDto){
+        PetDTO pet = this.petService.create(petCreationDto);
         return ResponseEntity.created(null).body(pet);
     }
 
