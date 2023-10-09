@@ -20,23 +20,29 @@ public class PetService {
     @Autowired
     private PetRepository petRepository;
 
-    public Pet create(PetCreationDto petCreationDto) {
+    public PetDTO create(PetCreationDto petCreationDto) {
         final Pet newPet = PetMapper.of(petCreationDto);
 
-        return this.petRepository.save(newPet);
+        return PetMapper.ofDTO(this.petRepository.save(newPet));
     }
-    public List<Pet> get(){
+    public List<PetDTO> get(){
         List<Pet> pets = this.petRepository.findAll();
         if (pets.isEmpty()){
             return null;
         }
-        return pets;
+        List<PetDTO> petsDTO = pets.stream().map(PetMapper::ofDTO).toList();
+        return petsDTO;
     }
 
-    public Pet getById(Long id) {
+    public PetDTO getById(Long id) {
+        Optional<Pet> petOpt = this.petRepository.findById(id);
 
-        return this.petRepository.findById(id).
-                orElseThrow(() -> new UserNotFound("User", id));
+        if(petOpt.isEmpty()){
+            return null;
+        }
+
+        Pet petBanco = petOpt.get();
+        return PetMapper.ofDTO(petBanco);
     }
 
     public boolean delete(Long id){
