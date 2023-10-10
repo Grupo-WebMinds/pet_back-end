@@ -4,11 +4,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import webminds.group.pet_backend.domain.pet.Pet;
-import webminds.group.pet_backend.domain.pet.repositories.PetRepository;
 import webminds.group.pet_backend.services.pet.PetService;
 import webminds.group.pet_backend.services.pet.dto.PetCreationDto;
-import webminds.group.pet_backend.services.pet.dto.PetDTO;
+import webminds.group.pet_backend.services.pet.dto.PetDto;
 
 import java.util.List;
 
@@ -20,8 +18,8 @@ public class PetController {
     private PetService petService;
 
     @GetMapping
-    public ResponseEntity<List<PetDTO>> get(){
-        List<PetDTO> pet = this.petService.get();
+    public ResponseEntity<List<PetDto>> get(){
+        List<PetDto> pet = this.petService.get();
         if (pet.isEmpty()){
             return ResponseEntity.noContent().build();
         }
@@ -29,8 +27,8 @@ public class PetController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PetDTO> getById(@PathVariable Long id){
-        PetDTO pets = this.petService.getById(id);
+    public ResponseEntity<PetDto> getById(@PathVariable Long id){
+        PetDto pets = this.petService.getById(id);
         if(pets == null){
             return ResponseEntity.status(204).build();
         }
@@ -38,14 +36,14 @@ public class PetController {
     }
 
     @PostMapping
-    public ResponseEntity<PetDTO> create(@RequestBody @Valid PetCreationDto petCreationDto){
-        PetDTO pet = this.petService.create(petCreationDto);
+    public ResponseEntity<PetDto> create(@RequestBody @Valid PetCreationDto petCreationDto){
+        PetDto pet = this.petService.create(petCreationDto);
         return ResponseEntity.created(null).body(pet);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PetDTO> upgrade(@RequestBody @Valid PetCreationDto petCreationDto, @PathVariable Long id){
-        PetDTO result = this.petService.update(petCreationDto, id);
+    public ResponseEntity<PetDto> upgrade(@RequestBody @Valid PetCreationDto petCreationDto, @PathVariable Long id){
+        PetDto result = this.petService.update(petCreationDto, id);
         if(result == null){
             return ResponseEntity.notFound().build();
         }
