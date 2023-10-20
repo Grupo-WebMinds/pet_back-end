@@ -12,16 +12,16 @@ import java.util.List;
 public class ListaPet {
 
     private ListaObj<PetDTO> listObj;
+    public void TamanhoArq(int tam){
+         listObj = new ListaObj<>(tam);
+    }
 
     public void adicionar(List<PetDTO> petDTOS){
         for (PetDTO p: petDTOS){
-            listObj.adiciona(p);
+            this.listObj.adiciona(p);
         }
     }
 
-    public void TamanhoArq(int tam){
-        ListaObj<PetDTO> listObj = new ListaObj<>(tam);
-    }
 
     public void GravaArquivoCsv(String nomeArq) {
         FileWriter arq = null; // arq representa o arquivo de escrito
