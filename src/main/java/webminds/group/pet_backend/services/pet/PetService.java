@@ -10,6 +10,7 @@ import webminds.group.pet_backend.exception.UserNotFound;
 import webminds.group.pet_backend.services.pet.dto.PetCreationDto;
 import webminds.group.pet_backend.services.pet.dto.PetDTO;
 import webminds.group.pet_backend.services.pet.dto.PetMapper;
+import webminds.group.pet_backend.services.pet.listPet.ListaPet;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,13 @@ public class PetService {
             return null;
         }
         List<PetDTO> petsDTO = pets.stream().map(PetMapper::ofDTO).toList();
+
+        ListaPet listaPet = new ListaPet();
+        listaPet.TamanhoArq(petsDTO.size());
+
+        listaPet.adicionar(petsDTO);
+        listaPet.GravaArquivoCsv("pet");
+
         return petsDTO;
     }
 
