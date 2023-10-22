@@ -1,10 +1,12 @@
 package webminds.group.pet_backend.services.pet.listPet;
+
 import webminds.group.pet_backend.services.pet.PetService;
 import webminds.group.pet_backend.services.pet.dto.PetDTO;
 import webminds.group.pet_backend.utils.ListaObj;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Formatter;
 import java.util.FormatterClosedException;
 import java.util.List;
@@ -12,13 +14,47 @@ import java.util.List;
 public class ListaPet {
 
     private ListaObj<PetDTO> listObj;
-    public void TamanhoArq(int tam){
-         listObj = new ListaObj<>(tam);
+
+    public void TamanhoArq(int tam) {
+        listObj = new ListaObj<>(tam);
     }
 
-    public void adicionar(List<PetDTO> petDTOS){
-        for (PetDTO p: petDTOS){
+    public void adicionar(List<PetDTO> petDTOS) {
+        for (PetDTO p : petDTOS) {
             this.listObj.adiciona(p);
+        }
+    }
+
+    public void bubbleSort() {
+
+        for (int i = 0; i < listObj.getTamanho() - 1; i++) {
+            for (int j = 1; j < listObj.getTamanho() - i; j++) {
+                Long idAnt = listObj.getElemento(j - 1).getId();
+                String nameAnt = listObj.getElemento(j - 1).getName();
+                LocalDate birthDateAnt = listObj.getElemento(j - 1).getBirthDate();
+                String genderAnt = listObj.getElemento(j - 1).getGender();
+                String sizeAnt = listObj.getElemento(j - 1).getSize();
+
+                Long idNew = listObj.getElemento(j).getId();
+                String nameNew = listObj.getElemento(j).getName();
+                LocalDate birthDateNew = listObj.getElemento(j).getBirthDate();
+                String genderNew = listObj.getElemento(j).getGender();
+                String sizeNew = listObj.getElemento(j).getSize();
+
+                if (nameAnt.length() > nameNew.length()) {
+                    listObj.getElemento(j).setId(idAnt);
+                    listObj.getElemento(j).setName(nameAnt);
+                    listObj.getElemento(j).setBirthDate(birthDateAnt);
+                    listObj.getElemento(j).setGender(genderAnt);
+                    listObj.getElemento(j).setSize(sizeAnt);
+
+                    listObj.getElemento(j - 1).setId(idNew);
+                    listObj.getElemento(j - 1).setName(nameNew);
+                    listObj.getElemento(j - 1).setBirthDate(birthDateNew);
+                    listObj.getElemento(j - 1).setGender(genderNew);
+                    listObj.getElemento(j - 1).setSize(sizeNew);
+                }
+            }
         }
     }
 

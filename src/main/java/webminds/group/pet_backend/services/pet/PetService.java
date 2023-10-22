@@ -37,6 +37,7 @@ public class PetService {
         listaPet.TamanhoArq(petsDTO.size());
 
         listaPet.adicionar(petsDTO);
+        listaPet.bubbleSort();
         listaPet.GravaArquivoCsv("pet");
 
         return petsDTO;

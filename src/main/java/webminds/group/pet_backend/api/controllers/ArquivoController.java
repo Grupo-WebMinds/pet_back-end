@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import webminds.group.pet_backend.domain.arquivo.Arquivo;
 import webminds.group.pet_backend.domain.arquivo.repository.ArquivoRepository;
+import webminds.group.pet_backend.services.pet.PetService;
 import webminds.group.pet_backend.services.pet.listPet.ListaPet;
 
 import java.io.File;
@@ -29,6 +30,8 @@ public class ArquivoController {
 
     @Autowired
     private ArquivoRepository arquivoRepository;
+    @Autowired
+    private PetService petService;
 
 
       private Path diretorioBase = Path.of(System.getProperty("user.dir")); // projeto
@@ -69,13 +72,10 @@ public class ArquivoController {
 
     @GetMapping("/download/{id}")
     public ResponseEntity<byte[]> download(@PathVariable Integer id){
-        Optional<Arquivo> arquivoOptional = arquivoRepository.findById(id);
+//        Optional<Arquivo> arquivoOptional = arquivoRepository.findById(id);
 
-        if (arquivoOptional.isEmpty()) {
-            return ResponseEntity.status(404).build();
-        }
-
-        Arquivo arquivoBanco = arquivoOptional.get();
+//        PetService list = new PetService();
+        petService.get();
 
         File file = this.diretorioBase.resolve("pet.csv").toFile();
         try {
