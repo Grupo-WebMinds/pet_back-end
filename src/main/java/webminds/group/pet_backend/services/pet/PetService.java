@@ -28,7 +28,7 @@ public class PetService {
         if (pets.isEmpty()){
             return null;
         }
-        List<PetDTO> petsDTO = pets.stream().map(PetMapper::ofDTO).toList();
+        List<PetDto> petsDTO = pets.stream().map(PetMapper::ofDTO).toList();
 
         ListaPet listaPet = new ListaPet();
         listaPet.TamanhoArq(petsDTO.size());

@@ -1,9 +1,6 @@
 package webminds.group.pet_backend.services.pet.listPet;
-
-import webminds.group.pet_backend.services.pet.PetService;
-import webminds.group.pet_backend.services.pet.dto.PetDTO;
+import webminds.group.pet_backend.services.pet.dto.PetDto;
 import webminds.group.pet_backend.utils.ListaObj;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -13,14 +10,14 @@ import java.util.List;
 
 public class ListaPet {
 
-    private ListaObj<PetDTO> listObj;
+    private ListaObj<PetDto> listObj;
 
     public void TamanhoArq(int tam) {
         listObj = new ListaObj<>(tam);
     }
 
-    public void adicionar(List<PetDTO> petDTOS) {
-        for (PetDTO p : petDTOS) {
+    public void adicionar(List<PetDto> petDTOS) {
+        for (PetDto p : petDTOS) {
             this.listObj.adiciona(p);
         }
     }
@@ -78,7 +75,7 @@ public class ListaPet {
         // Bloco try-catch para gravar o arquivo
         try {
             for (int i = 0; i < listObj.getTamanho(); i++) {
-                PetDTO pet = listObj.getElemento(i);
+                PetDto pet = listObj.getElemento(i);
                 // Grava os dados do pet no arquivo csv
                 // separando cada valor com um ; e finalizando com um \n
                 saida.format("%d;%s;%s;%s;%s\n", pet.getId(), pet.getName(), pet.getBirthDate(), pet.getGender(), pet.getSize());

@@ -52,6 +52,7 @@ public class SecurityConfiguration {
             new AntPathRequestMatcher("/actuator/*"),
             new AntPathRequestMatcher("/usuarios/login/**"),
             new AntPathRequestMatcher("/pets/**"),
+            new AntPathRequestMatcher("/pets-shops/**"),
             new AntPathRequestMatcher("/arquivos/**"),
             new AntPathRequestMatcher("/h2-console/**"),
             new AntPathRequestMatcher("/error/**")
