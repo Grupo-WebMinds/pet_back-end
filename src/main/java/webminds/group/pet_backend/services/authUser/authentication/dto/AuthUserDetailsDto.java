@@ -1,8 +1,8 @@
-package webminds.group.pet_backend.services.Client.authentication.dto;
+package webminds.group.pet_backend.services.authUser.authentication.dto;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import webminds.group.pet_backend.domain.client.AuthUser;
+import webminds.group.pet_backend.domain.authUser.AuthUser;
 
 import java.util.Collection;
 
@@ -11,15 +11,22 @@ public class AuthUserDetailsDto implements UserDetails {
     private final String name;
     private final String email;
     private final String password;
+    private final Short userType;
+
 
     public AuthUserDetailsDto(AuthUser authUser){
         this.name = authUser.getName();
         this.email = authUser.getEmail();
         this.password = authUser.getPassword();
+        this.userType = authUser.getUserType();
     }
 
     public String getName() {
         return name;
+    }
+
+    public Short getUserType() {
+        return userType;
     }
 
     @Override

@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import webminds.group.pet_backend.services.Client.authentication.AuthenticationUserService;
+import webminds.group.pet_backend.services.authUser.authentication.AuthenticationUserService;
 
 public class AuthenticationUserProvider implements AuthenticationProvider {
 

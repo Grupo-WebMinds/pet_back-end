@@ -1,11 +1,11 @@
-package webminds.group.pet_backend.services.Client.dto;
+package webminds.group.pet_backend.services.authUser.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
 public class AuthUserCreationDto {
 
-    @Size(min = 3, max = 10)
+    @Size(min = 3, max = 255)
     private String name;
 
     @Email
@@ -13,6 +13,16 @@ public class AuthUserCreationDto {
 
     @Size(min = 6, max = 20)
     private String password;
+
+    private short userType;
+
+    public Short getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Short userType) {
+        this.userType = userType;
+    }
 
     public String getName() {
         return name;
