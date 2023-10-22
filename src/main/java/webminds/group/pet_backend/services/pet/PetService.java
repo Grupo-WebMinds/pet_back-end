@@ -1,14 +1,11 @@
 package webminds.group.pet_backend.services.pet;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import webminds.group.pet_backend.domain.pet.Pet;
 import webminds.group.pet_backend.domain.pet.repositories.PetRepository;
-import webminds.group.pet_backend.exception.UserNotFound;
 import webminds.group.pet_backend.services.pet.dto.PetCreationDto;
-import webminds.group.pet_backend.services.pet.dto.PetDTO;
+import webminds.group.pet_backend.services.pet.dto.PetDto;
 import webminds.group.pet_backend.services.pet.dto.PetMapper;
 import webminds.group.pet_backend.services.pet.listPet.ListaPet;
 
@@ -21,12 +18,12 @@ public class PetService {
     @Autowired
     private PetRepository petRepository;
 
-    public PetDTO create(PetCreationDto petCreationDto) {
+    public PetDto create(PetCreationDto petCreationDto) {
         final Pet newPet = PetMapper.of(petCreationDto);
 
         return PetMapper.ofDTO(this.petRepository.save(newPet));
     }
-    public List<PetDTO> get(){
+    public List<PetDto> get(){
         List<Pet> pets = this.petRepository.findAll();
         if (pets.isEmpty()){
             return null;
@@ -39,11 +36,10 @@ public class PetService {
         listaPet.adicionar(petsDTO);
         listaPet.bubbleSort();
         listaPet.GravaArquivoCsv("pet");
-
         return petsDTO;
     }
 
-    public PetDTO getById(Long id) {
+    public PetDto getById(Long id) {
         Optional<Pet> petOpt = this.petRepository.findById(id);
 
         if(petOpt.isEmpty()){
@@ -62,7 +58,7 @@ public class PetService {
             return exist;
     }
 
-    public PetDTO update(PetCreationDto petCreationDto, Long id){
+    public PetDto update(PetCreationDto petCreationDto, Long id){
         boolean exist = this.petRepository.existsById(id);
         if (exist){
             Pet pet = PetMapper.of(petCreationDto);

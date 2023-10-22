@@ -1,11 +1,8 @@
 package webminds.group.pet_backend.services.pet.dto;
 
-import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Size;
-
 import java.time.LocalDate;
 
-public class PetDTO {
+public class PetDto {
 
     private Long id;
     private String name;
@@ -14,7 +11,7 @@ public class PetDTO {
 
     private String size;
 
-    public PetDTO(){
+    public PetDto(){
 
     }
 
