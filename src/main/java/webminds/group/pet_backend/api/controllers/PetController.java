@@ -20,7 +20,7 @@ public class PetController {
     @GetMapping
     public ResponseEntity<List<PetDto>> get(){
         List<PetDto> pet = this.petService.get();
-        if (pet.isEmpty()){
+        if (pet == null){
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(pet);
