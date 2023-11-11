@@ -1,13 +1,13 @@
-package webminds.group.pet_backend.services.authUser.authentication;
+package webminds.group.pet_backend.services.user.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import webminds.group.pet_backend.domain.authUser.AuthUser;
-import webminds.group.pet_backend.domain.authUser.repositories.AuthUserRepository;
-import webminds.group.pet_backend.services.authUser.authentication.dto.AuthUserDetailsDto;
+import webminds.group.pet_backend.domain.user.AuthUser;
+import webminds.group.pet_backend.domain.user.repositories.AuthUserRepository;
+import webminds.group.pet_backend.services.user.authentication.dto.AuthUserDetailsDto;
 
 import java.util.Optional;
 

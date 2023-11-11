@@ -1,4 +1,4 @@
-package webminds.group.pet_backend.services.authUser.authentication.dto;
+package webminds.group.pet_backend.services.user.authentication.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

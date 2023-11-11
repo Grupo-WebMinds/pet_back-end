@@ -1,9 +1,8 @@
-package webminds.group.pet_backend.services.authUser.authentication.dto;
+package webminds.group.pet_backend.services.user.authentication.dto;
 
 public class AuthUserTokenDto {
 
     private Long userId;
-    private String name;
     private String email;
     private Short userType;
 
@@ -23,14 +22,6 @@ public class AuthUserTokenDto {
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {

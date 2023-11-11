@@ -1,7 +1,8 @@
-package webminds.group.pet_backend.domain.authUser.repositories;
+package webminds.group.pet_backend.domain.user.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import webminds.group.pet_backend.domain.authUser.AuthUser;
+import org.springframework.data.jpa.repository.Query;
+import webminds.group.pet_backend.domain.user.AuthUser;
 
 import java.util.Optional;
 
