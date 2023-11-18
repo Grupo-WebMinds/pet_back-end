@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS auth_user (
                                          name VARCHAR(255) NOT NULL,
     cell_phone VARCHAR(15) NOT NULL,
     telephone VARCHAR(15) NOT NULL,
-    date_birth DATETIME NOT NULL,
+    date_birth DATE NOT NULL,
     cpf CHAR(11) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,

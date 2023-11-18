@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -16,7 +17,7 @@ public class AuthUserDto {
     private Short userType;
     private String cellPhone;
     private String telephone;
-    private LocalDateTime dateBirth;
+    private LocalDate dateBirth;
     private String cpf;
     private LocalDateTime dateCreation;
 

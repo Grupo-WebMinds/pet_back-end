@@ -19,7 +19,7 @@ public class EmployeeUserAuthCreationDto {
     private String password;
     private String cellPhone;
     private String telephone;
-    private LocalDateTime dateBirth;
+    private LocalDate dateBirth;
     private String cpf;
     private LocalTime timeStart;
     private LocalTime timeEnd;

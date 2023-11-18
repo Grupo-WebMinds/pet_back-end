@@ -8,6 +8,7 @@ import lombok.Setter;
 import webminds.group.pet_backend.domain.pet.Pet;
 import webminds.group.pet_backend.domain.petShop.PetShop;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class AuthUser {
     private String name;
     private String cellPhone;
     private String telephone;
-    private LocalDateTime dateBirth;
+    private LocalDate dateBirth;
     private String cpf;
     private LocalDateTime dateCreation;
 
