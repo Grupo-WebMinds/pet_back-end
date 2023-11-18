@@ -1,7 +1,6 @@
-package webminds.group.pet_backend.services.user;
+package webminds.group.pet_backend.services.user.client;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,14 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import webminds.group.pet_backend.api.configuration.security.jwt.ManagerTokenJwt;
 import webminds.group.pet_backend.domain.user.AuthUser;
-import webminds.group.pet_backend.domain.user.User;
 import webminds.group.pet_backend.domain.user.repositories.AuthUserRepository;
-import webminds.group.pet_backend.domain.user.repositories.UserRepository;
 import webminds.group.pet_backend.services.user.authentication.dto.AuthUserLoginDto;
 import webminds.group.pet_backend.services.user.authentication.dto.AuthUserTokenDto;
-import webminds.group.pet_backend.services.user.dto.AuthUserCreationDto;
-import webminds.group.pet_backend.services.user.dto.AuthUserMapper;
+import webminds.group.pet_backend.services.user.client.dto.mapper.AuthUserMapper;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,8 +25,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     private final AuthUserRepository authUsuarioRepository;
-
-    private final UserRepository userRepository;
 
     private final ManagerTokenJwt managerTokenJwt;
 
@@ -43,20 +38,15 @@ public class UserService {
         return newAuthUser;
     }
 
-    public User getByIdUser(Long id){
-        Optional<User> user = userRepository.findById(id);
-        return user.get();
+    public Optional<AuthUser> getById(Long id){
+        return authUsuarioRepository.findById(id);
     }
 
-    public AuthUser getByIdAuthUser(Long id){
-        Optional<AuthUser> user = authUsuarioRepository.findById(id);
-        return user.get();
+
+    public List<AuthUser> get(){
+        return authUsuarioRepository.findAll();
     }
 
-    public User createUser(User user){
-        User newUser = userRepository.save(user);
-        return newUser;
-    }
 
     public AuthUserTokenDto authenticate(AuthUserLoginDto usuarioLoginDto) {
 

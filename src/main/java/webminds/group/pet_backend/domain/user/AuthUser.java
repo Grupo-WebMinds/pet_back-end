@@ -5,6 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import webminds.group.pet_backend.domain.pet.Pet;
+import webminds.group.pet_backend.domain.petShop.PetShop;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,7 +28,20 @@ public class AuthUser {
 
     private Short userType;
 
-    @OneToOne(mappedBy = "authUser")
-    private User user;
+    private String name;
+    private String cellPhone;
+    private String telephone;
+    private LocalDateTime dateBirth;
+    private String cpf;
+    private LocalDateTime dateCreation;
+
+    @OneToMany(mappedBy = "authUser")
+    private List<PetShop> listPetShop;
+
+    @OneToMany(mappedBy = "authUser")
+    private List<Employee> listEmployee;
+
+    @OneToMany(mappedBy = "authUser")
+    private List<Pet> listPet;
 
 }

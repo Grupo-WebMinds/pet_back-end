@@ -1,7 +1,13 @@
 package webminds.group.pet_backend.services.user.authentication.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AuthUserLoginDto {
 
     @Schema(description = "E-mail do usuário", example = "john@doe.com")
@@ -10,19 +16,4 @@ public class AuthUserLoginDto {
     @Schema(description = "Senha do usuário", example = "123456")
     private String password;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

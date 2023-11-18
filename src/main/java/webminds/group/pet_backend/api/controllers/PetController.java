@@ -1,62 +1,35 @@
 package webminds.group.pet_backend.api.controllers;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import webminds.group.pet_backend.domain.user.AuthUser;
 import webminds.group.pet_backend.services.pet.PetService;
 import webminds.group.pet_backend.services.pet.dto.PetCreationDto;
-import webminds.group.pet_backend.services.pet.dto.PetDto;
+import webminds.group.pet_backend.services.pet.dto.mapper.PetMapper;
+import webminds.group.pet_backend.services.user.client.UserService;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/pets")
 public class PetController {
 
-    @Autowired
-    private PetService petService;
+    private final UserService userService;
+    private final PetService petService;
 
-    @GetMapping
-    public ResponseEntity<List<PetDto>> get(){
-        List<PetDto> pet = this.petService.get();
-        if (pet == null){
+    @PostMapping("/{id}")
+    private ResponseEntity<Void> create(@RequestBody @Valid PetCreationDto petCreationDto, @PathVariable Long id){
+        Optional<AuthUser> user = this.userService.getById(id);
+
+        if (user.isEmpty()){
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok().body(pet);
-    }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PetDto> getById(@PathVariable Long id){
-        PetDto pets = this.petService.getById(id);
-        if(pets == null){
-            return ResponseEntity.status(204).build();
-        }
-        return ResponseEntity.status(200).body(pets);
-    }
-
-    @PostMapping
-    public ResponseEntity<PetDto> create(@RequestBody @Valid PetCreationDto petCreationDto){
-        PetDto pet = this.petService.create(petCreationDto);
-        return ResponseEntity.created(null).body(pet);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<PetDto> upgrade(@RequestBody @Valid PetCreationDto petCreationDto, @PathVariable Long id){
-        PetDto result = this.petService.update(petCreationDto, id);
-        if(result == null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().body(result);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        boolean result = this.petService.delete(id);
-        if(result){
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+        this.petService.creationPet(PetMapper.ofCreation(petCreationDto, user.get()));
+        return ResponseEntity.created(null).build();
     }
 
 }
