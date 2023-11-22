@@ -20,7 +20,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import webminds.group.pet_backend.api.configuration.security.jwt.ManagerTokenJwt;
-import webminds.group.pet_backend.services.authUser.authentication.AuthenticationUserService;
+import webminds.group.pet_backend.services.user.authentication.AuthenticationUserService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,11 +50,8 @@ public class SecurityConfiguration {
             new AntPathRequestMatcher("/webjars/**"),
             new AntPathRequestMatcher("/v3/api-docs/**"),
             new AntPathRequestMatcher("/actuator/*"),
-            new AntPathRequestMatcher("/usuarios/login/**"),
-            new AntPathRequestMatcher("/pets/**"),
-            new AntPathRequestMatcher("/pets-shops/**"),
-            new AntPathRequestMatcher("/arquivos/**"),
-            new AntPathRequestMatcher("/h2-console/**"),
+            new AntPathRequestMatcher("/login/**"),
+            new AntPathRequestMatcher("/usuarios/**"),
             new AntPathRequestMatcher("/error/**")
     };
 
