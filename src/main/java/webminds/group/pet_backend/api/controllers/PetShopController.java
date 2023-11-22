@@ -3,6 +3,7 @@ package webminds.group.pet_backend.api.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import webminds.group.pet_backend.domain.petShop.PetShop;
@@ -34,6 +35,12 @@ public class PetShopController {
 
         if (user.isEmpty()){
             return ResponseEntity.noContent().build();
+        }
+
+        Optional<PetShop> petShop = this.petShopService.getByUser(id);
+
+        if (petShop.isPresent()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
 
         this.petShopService.create(PetShopMapper.ofCreation(petShopCreationDto, user.get()));

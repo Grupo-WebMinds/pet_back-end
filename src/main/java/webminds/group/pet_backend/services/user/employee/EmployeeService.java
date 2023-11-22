@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import webminds.group.pet_backend.domain.user.Employee;
 import webminds.group.pet_backend.domain.user.repositories.EmployeeRepository;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
@@ -13,6 +15,10 @@ public class EmployeeService {
 
     public Employee createEmployee(Employee newEmployee) {
         return employeeRepository.save(newEmployee);
+    }
+
+    public Optional<Employee> getById(Long id){
+        return employeeRepository.findById(id);
     }
 
 }

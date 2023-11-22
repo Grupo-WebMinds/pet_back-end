@@ -99,40 +99,40 @@ CREATE TABLE IF NOT EXISTS assignment_service_employee (
     );
 
 
-
-CREATE TABLE IF NOT EXISTS closed_week_pet_shop (
-                                                    id INT NOT NULL auto_increment,
-                                                    is_closed BOOLEAN NOT NULL,
-                                                    pet_shop_id INT NOT NULL,
-                                                    PRIMARY KEY (id),
-    FOREIGN KEY (pet_shop_id)
-    REFERENCES pet_shop (id)
-    );
-
-CREATE TABLE IF NOT EXISTS closed_days_pet_shop (
-                                                    id INT NOT NULL auto_increment,
-                                                    date_close DATE NOT NULL,
-                                                    pet_shop_id INT NOT NULL,
-                                                    PRIMARY KEY (id),
-    FOREIGN KEY (pet_shop_id)
-    REFERENCES pet_shop (id)
-    );
-
-
-CREATE TABLE IF NOT EXISTS closed_week_employee (
-                                                    id INT NOT NULL auto_increment,
-                                                    is_closed TINYINT NOT NULL,
-                                                    employee_id INT NOT NULL,
-                                                    PRIMARY KEY (id),
-    FOREIGN KEY (employee_id) REFERENCES employee (id)
-    );
-
-
-CREATE TABLE IF NOT EXISTS closed_days_employee (
-                                                    id INT NOT NULL auto_increment,
-                                                    date_close DATE NOT NULL,
-                                                    employee_id INT NOT NULL,
-                                                    PRIMARY KEY (id),
-    FOREIGN KEY (employee_id) REFERENCES employee (id)
-    );
+-- Não tem necessidade
+-- CREATE TABLE IF NOT EXISTS closed_week_pet_shop (
+--                                                     id INT NOT NULL auto_increment,
+--                                                     is_closed BOOLEAN NOT NULL,
+--                                                     pet_shop_id INT NOT NULL,
+--                                                     PRIMARY KEY (id),
+--     FOREIGN KEY (pet_shop_id)
+--     REFERENCES pet_shop (id)
+--     );
+--
+-- CREATE TABLE IF NOT EXISTS closed_days_pet_shop (
+--                                                     id INT NOT NULL auto_increment,
+--                                                     date_close DATE NOT NULL,
+--                                                     pet_shop_id INT NOT NULL,
+--                                                     PRIMARY KEY (id),
+--     FOREIGN KEY (pet_shop_id)
+--     REFERENCES pet_shop (id)
+--     );
+--
+--
+-- CREATE TABLE IF NOT EXISTS closed_week_employee (
+--                                                     id INT NOT NULL auto_increment,
+--                                                     is_closed TINYINT NOT NULL,
+--                                                     employee_id INT NOT NULL,
+--                                                     PRIMARY KEY (id),
+--     FOREIGN KEY (employee_id) REFERENCES employee (id)
+--     );
+--
+--
+-- CREATE TABLE IF NOT EXISTS closed_days_employee (
+--                                                     id INT NOT NULL auto_increment,
+--                                                     date_close DATE NOT NULL,
+--                                                     employee_id INT NOT NULL,
+--                                                     PRIMARY KEY (id),
+--     FOREIGN KEY (employee_id) REFERENCES employee (id)
+--     );
 

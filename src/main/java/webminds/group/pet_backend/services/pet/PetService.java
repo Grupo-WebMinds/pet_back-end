@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import webminds.group.pet_backend.domain.pet.Pet;
 import webminds.group.pet_backend.domain.pet.repositories.PetRepository;
 
+import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +16,10 @@ public class PetService {
 
     public Pet creationPet(Pet pet){
         return this.petRepository.save(pet);
+    }
+
+    public Optional<Pet> getById(Long id){
+        return this.petRepository.findById(id);
     }
 
 }

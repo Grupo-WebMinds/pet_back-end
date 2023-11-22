@@ -23,6 +23,5 @@ public class EmployeeUserAuthCreationDto {
     private String cpf;
     private LocalTime timeStart;
     private LocalTime timeEnd;
-    private LocalTime timeWork;
 
 }

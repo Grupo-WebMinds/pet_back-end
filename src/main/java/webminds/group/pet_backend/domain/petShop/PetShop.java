@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import webminds.group.pet_backend.domain.scheduling.Scheduling;
 import webminds.group.pet_backend.domain.user.AuthUser;
 import webminds.group.pet_backend.domain.user.Employee;
 
