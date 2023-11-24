@@ -3,6 +3,8 @@ package webminds.group.pet_backend.services.user.employee.dto.mapper;
 import webminds.group.pet_backend.domain.petShop.PetShop;
 import webminds.group.pet_backend.domain.user.AuthUser;
 import webminds.group.pet_backend.domain.user.Employee;
+import webminds.group.pet_backend.services.user.client.dto.mapper.AuthUserMapper;
+import webminds.group.pet_backend.services.user.employee.dto.EmployeeDto;
 import webminds.group.pet_backend.services.user.employee.dto.EmployeeUserAuthCreationDto;
 
 import java.time.LocalDateTime;
@@ -30,7 +32,17 @@ public class EmployeeMapper {
         dto.setCellPhone(newUser.getCellPhone());
         dto.setTelephone(newUser.getTelephone());
         dto.setDateBirth(newUser.getDateBirth());
+        dto.setGender(newUser.getGender());
         dto.setDateCreation(LocalDateTime.now());
+
+        return dto;
+    }
+
+    public static EmployeeDto of(Employee employee){
+        EmployeeDto dto = new EmployeeDto();
+        dto.setTimeStart(employee.getTimeStart());
+        dto.setTimeEnd(employee.getTimeEnd());
+        dto.setAuthUserDto(AuthUserMapper.ofDto(employee.getAuthUser()));
 
         return dto;
     }

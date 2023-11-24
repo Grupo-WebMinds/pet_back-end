@@ -16,5 +16,4 @@ public class EmployeeDto {
     private LocalTime timeStart;
     private LocalTime timeEnd;
     private AuthUserDto authUserDto;
-    private PetShopDto petShopDto;
 }

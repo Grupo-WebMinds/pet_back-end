@@ -3,6 +3,7 @@ package webminds.group.pet_backend.services.pet.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import webminds.group.pet_backend.services.user.client.dto.AuthUserDto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,5 +21,6 @@ public class PetDto {
     private Short gender;
     private LocalDate dateBirth;
     private LocalDateTime dateCreation;
+    private AuthUserDto authUserDto;
 
 }

@@ -22,18 +22,15 @@ public class AuthUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String email;
-
     private String password;
-
     private Short userType;
-
     private String name;
     private String cellPhone;
     private String telephone;
     private LocalDate dateBirth;
     private String cpf;
+    private Short gender;
     private LocalDateTime dateCreation;
 
     @OneToMany(mappedBy = "authUser")

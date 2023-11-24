@@ -11,6 +11,7 @@ import webminds.group.pet_backend.services.user.client.dto.AuthUserDto;
 import webminds.group.pet_backend.services.user.client.dto.mapper.AuthUserMapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,11 +30,28 @@ public class UserController {
         return ResponseEntity.ok(all.stream().map(AuthUserMapper::ofDto).toList());
     }
 
+    @GetMapping("/{id}")
+    private ResponseEntity<AuthUserDto> getById(@PathVariable Long id){
+        Optional<AuthUser> user = this.userService.getById(id);
+
+        if (user.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok().body(AuthUserMapper.ofDto(user.get()));
+    }
+
     @PostMapping
     private ResponseEntity<Void> create(@RequestBody @Valid AuthUserCreationDto newUser){
         userService.createAuthUser(AuthUserMapper.ofCreationDto(newUser));
 
         return ResponseEntity.created(null).build();
+    }
+
+    @DeleteMapping("/{id}")
+    private ResponseEntity<Void> delete(@PathVariable Long id){
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SchedulingCreationDto {
+public class SchedulingDto {
+
     private LocalDateTime dateScheduling;
     private String observation;
-    private Long idAssignment;
-    private Long idPet;
+
 }
