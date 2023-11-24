@@ -30,6 +30,24 @@ public class PetShopService {
         return petShopRepository.save(petShop);
     }
 
+    public PetShop update(PetShop petShop, Long id){
+        Optional<PetShop> ps = petShopRepository.findById(id);
+
+        if (ps.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+        }
+
+        boolean exist = petShopRepository.existsByCnpj(petShop.getCnpj());
+
+        if(exist && !ps.get().getCnpj().equals(petShop.getCnpj())){
+            throw new ConflictCreateException("petShop", petShop.getCnpj());
+        }
+
+        petShop.setId(id);
+        return petShopRepository.save(petShop);
+
+    }
+
     public List<PetShop> get(){
         return petShopRepository.findAll();
     }

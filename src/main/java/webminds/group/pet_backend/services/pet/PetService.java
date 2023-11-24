@@ -29,6 +29,16 @@ public class PetService {
         return this.petRepository.findById(id);
     }
 
+    public Pet update(Pet pet, Long id){
+        boolean exist = petRepository.existsById(id);
+        if(!exist){
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+        }
+
+        pet.setId(id);
+        return petRepository.save(pet);
+    }
+
     public void delete(Long id){
         boolean exist = petRepository.existsById(id);
         if(!exist){

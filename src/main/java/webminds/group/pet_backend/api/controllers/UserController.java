@@ -48,6 +48,13 @@ public class UserController {
         return ResponseEntity.created(null).build();
     }
 
+    @PutMapping("/{id}")
+    private ResponseEntity<Void> update(@RequestBody @Valid AuthUserCreationDto newUser, @PathVariable Long id){
+        userService.update(AuthUserMapper.ofCreationDto(newUser), id);
+
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/{id}")
     private ResponseEntity<Void> delete(@PathVariable Long id){
         userService.delete(id);

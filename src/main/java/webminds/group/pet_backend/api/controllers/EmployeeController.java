@@ -59,9 +59,6 @@ public class EmployeeController {
     @PostMapping("/{idOwner}")
     private ResponseEntity<Void> create(@RequestBody @Valid EmployeeUserAuthCreationDto employeeUserAuthCreationDto, @PathVariable Long idOwner){
 
-//        if (employeeUserAuthCreationDto.getListIdService().size() != employeeUserAuthCreationDto.getListTimeWork().size()){
-//            return ResponseEntity.badRequest().build();
-//        }
         Optional<PetShop> petShop = this.petShopService.getByUser(idOwner);
 
         if (petShop.isEmpty()){
@@ -72,6 +69,24 @@ public class EmployeeController {
         this.employeeService.createEmployee(EmployeeMapper.ofCreation(employeeUserAuthCreationDto, user, petShop.get()));
 
         return ResponseEntity.created(null).build();
+    }
+
+    @PutMapping("/{idOwner}/{id}")
+    private ResponseEntity<Void> update(@RequestBody @Valid EmployeeUserAuthCreationDto employeeUserAuthCreationDto, @PathVariable Long idOwner, @PathVariable Long id){
+        Optional<PetShop> petShop = this.petShopService.getByUser(idOwner);
+        if (petShop.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        Optional<Employee> employee = employeeService.getById(id);
+
+        if (employee.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        AuthUser user = this.userService.update(EmployeeMapper.ofCreationAuth(employeeUserAuthCreationDto), employee.get().getAuthUser().getId());
+        this.employeeService.update(EmployeeMapper.ofCreation(employeeUserAuthCreationDto, user, petShop.get()), id);
+
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/servicos")
@@ -90,6 +105,29 @@ public class EmployeeController {
         assignmentServiceEmployeeService.create(AssignmentServiceEmployeeMapper.ofCreationAssignment(servicePet.get(), employee.get(), assignmentServiceEmployeeCreationDto.getTimeWork()));
 
         return ResponseEntity.created(null).build();
+    }
+
+    @PutMapping("/servicos/{id}")
+    private ResponseEntity<Void> updateService(@RequestBody @Valid AssignmentServiceEmployeeCreationDto assignmentServiceEmployeeCreationDto, @PathVariable Long id){
+        Optional<Employee> employee = employeeService.getById(assignmentServiceEmployeeCreationDto.getIdEmployee());
+        if(employee.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        Optional<ServicePet> servicePet = servicePetService.getById(assignmentServiceEmployeeCreationDto.getIdService());
+        if(servicePet.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        assignmentServiceEmployeeService.update(AssignmentServiceEmployeeMapper.ofCreationAssignment(servicePet.get(), employee.get(), assignmentServiceEmployeeCreationDto.getTimeWork()), id);
+
+        return null;
+    }
+
+    @DeleteMapping("/servicos/{id}")
+    private ResponseEntity<Void> deleteService(@PathVariable Long id){
+        assignmentServiceEmployeeService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")

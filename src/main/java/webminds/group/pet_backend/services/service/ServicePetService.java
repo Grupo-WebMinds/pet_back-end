@@ -39,5 +39,15 @@ public class ServicePetService {
 
     }
 
+    public ServicePet update(ServicePet service, Long id) {
+        boolean exist = servicePetRepository.existsById(id);
+        if(!exist){
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+        }
+
+        service.setId(id);
+        return servicePetRepository.save(service);
+    }
+
 }
 

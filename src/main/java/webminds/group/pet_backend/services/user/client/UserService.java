@@ -48,6 +48,28 @@ public class UserService {
         return newAuthUser;
     }
 
+    public AuthUser update(AuthUser authUser, Long id){
+        AuthUser newAuthUser = authUser;
+        Optional<AuthUser> verificar = getById(id);
+
+        boolean exist = authUsuarioRepository.existsByEmail(newAuthUser.getEmail());
+
+        if(verificar.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+        }
+
+        if(exist && !verificar.get().getEmail().equals(newAuthUser.getEmail())){
+            throw new ConflictCreateException("authUser", newAuthUser.getEmail());
+        }
+
+        String senhaCriptografada = passwordEncoder.encode(newAuthUser.getPassword());
+        newAuthUser.setPassword(senhaCriptografada);
+        newAuthUser.setId(id);
+        authUsuarioRepository.save(newAuthUser);
+
+        return newAuthUser;
+    }
+
     public Optional<AuthUser> getById(Long id){
         return authUsuarioRepository.findById(id);
     }
@@ -61,6 +83,7 @@ public class UserService {
         authUsuarioRepository.deleteById(id);
 
     }
+
 
 
     public List<AuthUser> get(){
