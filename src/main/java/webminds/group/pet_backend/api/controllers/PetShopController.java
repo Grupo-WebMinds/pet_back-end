@@ -28,16 +28,39 @@ public class PetShopController {
     private final UserService userService;
 
 
-    @PostMapping("/{id}")
-    public ResponseEntity<Void> create(@RequestBody @Valid PetShopCreationDto petShopCreationDto, @PathVariable Long id){
+    @GetMapping
+    private ResponseEntity<List<PetShopDto>> get() {
+        List<PetShop> all = petShopService.get();
 
-        Optional<AuthUser> user = this.userService.getById(id);
+        if (all.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(all.stream().map(PetShopMapper::ofDto).toList());
+    }
+
+    @GetMapping("/{id}")
+    private ResponseEntity<PetShopDto> getById(@PathVariable Long id){
+        Optional<PetShop> item = petShopService.getById(id);
+
+        if (item.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok().body(PetShopMapper.ofDto(item.get()));
+    }
+
+
+    @PostMapping("/{idOwner}")
+    public ResponseEntity<Void> create(@RequestBody @Valid PetShopCreationDto petShopCreationDto, @PathVariable Long idOwner){
+
+        Optional<AuthUser> user = this.userService.getById(idOwner);
 
         if (user.isEmpty()){
             return ResponseEntity.noContent().build();
         }
 
-        Optional<PetShop> petShop = this.petShopService.getByUser(id);
+        Optional<PetShop> petShop = this.petShopService.getByUser(idOwner);
 
         if (petShop.isPresent()){
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -46,6 +69,12 @@ public class PetShopController {
         this.petShopService.create(PetShopMapper.ofCreation(petShopCreationDto, user.get()));
 
         return ResponseEntity.created(null).build();
+    }
+
+    @DeleteMapping("/{id}")
+    private ResponseEntity<Void> delete(@PathVariable Long id){
+        petShopService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 

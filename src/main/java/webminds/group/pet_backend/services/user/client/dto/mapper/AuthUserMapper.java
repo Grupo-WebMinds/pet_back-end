@@ -30,6 +30,7 @@ public class AuthUserMapper {
         dto.setCellPhone(authUser.getCellPhone());
         dto.setTelephone(authUser.getTelephone());
         dto.setDateBirth(authUser.getDateBirth());
+        dto.setGender(authUser.getGender());
         dto.setDateCreation(authUser.getDateCreation());
 
         return dto;
@@ -46,6 +47,7 @@ public class AuthUserMapper {
         dto.setCellPhone(authUser.getCellPhone());
         dto.setTelephone(authUser.getTelephone());
         dto.setDateBirth(authUser.getDateBirth());
+        dto.setGender(authUser.getGender());
         dto.setDateCreation(LocalDateTime.now());
 
         return dto;

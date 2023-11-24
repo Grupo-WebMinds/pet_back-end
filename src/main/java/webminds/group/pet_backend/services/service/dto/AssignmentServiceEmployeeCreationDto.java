@@ -13,7 +13,7 @@ import java.time.LocalTime;
 public class AssignmentServiceEmployeeCreationDto {
 
     private LocalTime timeWork;
-    private Long service;
-    private Long employee;
+    private Long idService;
+    private Long idEmployee;
 
 }

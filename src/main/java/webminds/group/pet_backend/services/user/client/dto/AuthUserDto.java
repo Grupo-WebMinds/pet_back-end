@@ -19,6 +19,7 @@ public class AuthUserDto {
     private String telephone;
     private LocalDate dateBirth;
     private String cpf;
+    private Short gender;
     private LocalDateTime dateCreation;
 
 }

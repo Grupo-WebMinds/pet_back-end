@@ -9,4 +9,6 @@ public interface PetShopRepository extends JpaRepository<PetShop, Long> {
 
     Optional<PetShop> findByAuthUserId(Long id);
 
+    boolean existsByCnpj(String cnpj);
+
 }

@@ -11,7 +11,6 @@ public interface AuthUserRepository extends JpaRepository<AuthUser, Long> {
 
     Optional<AuthUser> findByEmail(String email);
 
-    @Query("SELECT au FROM AuthUser au")
-    List<AuthUser> tdBusca();
+    boolean existsByEmail(String email);
 
 }

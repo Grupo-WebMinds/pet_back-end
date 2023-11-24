@@ -4,6 +4,8 @@ package webminds.group.pet_backend.services.pet.dto.mapper;
 import webminds.group.pet_backend.domain.pet.Pet;
 import webminds.group.pet_backend.domain.user.AuthUser;
 import webminds.group.pet_backend.services.pet.dto.PetCreationDto;
+import webminds.group.pet_backend.services.pet.dto.PetDto;
+import webminds.group.pet_backend.services.user.client.dto.mapper.AuthUserMapper;
 
 import java.time.LocalDateTime;
 
@@ -23,6 +25,21 @@ public class PetMapper {
         pet.setAuthUser(authUser);
 
         return pet;
+    }
+
+    public static PetDto of(Pet pet){
+        PetDto dto = new PetDto();
+        dto.setName(pet.getName());
+        dto.setTypePet(pet.getTypePet());
+        dto.setRace(pet.getRace());
+        dto.setWeight(pet.getWeight());
+        dto.setSize(pet.getSize());
+        dto.setGender(pet.getGender());
+        dto.setDateBirth(pet.getDateBirth());
+        dto.setDateCreation(pet.getDateCreation());
+        dto.setAuthUserDto(AuthUserMapper.ofDto(pet.getAuthUser()));
+
+        return dto;
     }
 
 }

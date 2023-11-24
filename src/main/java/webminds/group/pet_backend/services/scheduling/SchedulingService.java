@@ -6,6 +6,8 @@ import webminds.group.pet_backend.domain.scheduling.Scheduling;
 import webminds.group.pet_backend.domain.scheduling.repositories.SchedulingRepository;
 import webminds.group.pet_backend.domain.service.AssignmentServiceEmployee;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SchedulingService {
@@ -15,5 +17,8 @@ public class SchedulingService {
         return schedulingRepository.save(scheduling);
     }
 
+    public List<Scheduling> get(){
+        return schedulingRepository.findAll();
+    }
 
 }
