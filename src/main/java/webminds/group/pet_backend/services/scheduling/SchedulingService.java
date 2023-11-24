@@ -50,4 +50,8 @@ public class SchedulingService {
 
     }
 
+    public List<Scheduling> getByAuthUser(Long id) {
+        return schedulingRepository.findAllByPetAuthUserId(id);
+    }
+
 }
