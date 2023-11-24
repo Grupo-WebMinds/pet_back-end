@@ -59,6 +59,19 @@ public class PetController {
         return ResponseEntity.created(null).build();
     }
 
+    @PutMapping("/{idClient}/{id}")
+    private ResponseEntity<Void> update(@RequestBody @Valid PetCreationDto petCreationDto, @PathVariable Long idClient, @PathVariable Long id){
+        Optional<AuthUser> user = this.userService.getById(idClient);
+
+        if (user.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        this.petService.update(PetMapper.ofCreation(petCreationDto, user.get()), id);
+
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/{id}")
     private ResponseEntity<Void> delete(@PathVariable Long id){
         petService.delete(id);

@@ -71,6 +71,24 @@ public class PetShopController {
         return ResponseEntity.created(null).build();
     }
 
+    @PutMapping("/{idOwner}/{id}")
+    public ResponseEntity<Void> update(@RequestBody @Valid PetShopCreationDto petShopCreationDto, @PathVariable Long idOwner, @PathVariable Long id){
+        Optional<AuthUser> user = this.userService.getById(idOwner);
+
+        if (user.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        Optional<PetShop> petShop = this.petShopService.getByUser(idOwner);
+
+        if (petShop.isPresent()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+
+        this.petShopService.update(PetShopMapper.ofCreation(petShopCreationDto, user.get()), id);
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/{id}")
     private ResponseEntity<Void> delete(@PathVariable Long id){
         petShopService.delete(id);

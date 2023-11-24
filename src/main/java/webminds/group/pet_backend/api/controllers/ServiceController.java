@@ -61,6 +61,20 @@ public class ServiceController {
         return ResponseEntity.created(null).build();
     }
 
+    @PutMapping("/{idOwner}/{id}")
+    private ResponseEntity<Void> update(@RequestBody @Valid ServiceCreationDto serviceCreationDto, @PathVariable Long idOwner, @PathVariable Long id){
+
+        Optional<PetShop> petShop = this.petShopService.getByUser(idOwner);
+
+        if (petShop.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        this.servicePet.update(ServicePetMapper.ofCreation(serviceCreationDto, petShop.get()), id);
+
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/{id}")
     private ResponseEntity<Void> delete(@PathVariable Long id){
         servicePet.delete(id);

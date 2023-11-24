@@ -20,6 +20,11 @@ public class EmployeeService {
         return employeeRepository.save(newEmployee);
     }
 
+    public Employee update(Employee employee, Long id){
+        employee.setId(id);
+        return employeeRepository.save(employee);
+    }
+
     public List<Employee> get(){
         return employeeRepository.findAll();
     }
