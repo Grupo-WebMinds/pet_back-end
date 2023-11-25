@@ -23,6 +23,7 @@ public class ServicePet {
     private String name;
     private Short size;
     private Double price;
+    private Short typeService;
 
     @ManyToOne
     private PetShop petShop;

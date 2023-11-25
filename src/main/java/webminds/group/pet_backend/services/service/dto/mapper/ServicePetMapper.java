@@ -12,6 +12,7 @@ public class ServicePetMapper {
         ServicePet servicePet = new ServicePet();
         servicePet.setName(serviceCreationDto.getName());
         servicePet.setSize(serviceCreationDto.getSize());
+        servicePet.setTypeService(serviceCreationDto.getTypeService());
         servicePet.setPrice(serviceCreationDto.getPrice());
         servicePet.setPetShop(petShop);
 
@@ -24,6 +25,7 @@ public class ServicePetMapper {
         dto.setId(servicePet.getId());
         dto.setName(servicePet.getName());
         dto.setSize(servicePet.getSize());
+        dto.setTypeService(servicePet.getTypeService());
         dto.setPrice(servicePet.getPrice());
         dto.setPetShopDto(PetShopMapper.ofDto(servicePet.getPetShop()));
 

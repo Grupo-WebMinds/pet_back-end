@@ -14,6 +14,7 @@ public class ServicePetDto {
     private String name;
     private Short size;
     private Double price;
+    private Short typeService;
     private PetShopDto petShopDto;
 
 }
