@@ -136,15 +136,15 @@ public class SchedulingController {
 
         String nomeArq = "comprovante.txt";
 
-        String corpo = "";
-        corpo += String.format("%-40.40s", dto.getPetDto().getAuthUserDto().getName());
-        corpo += String.format("%-40.40s", dto.getPetDto().getAuthUserDto().getCpf());
-        corpo += String.format("%-40.40s", dto.getPetDto().getName());
-        corpo += String.format("%-40.40s", dto.getAssignmentServiceEmployeeSchedulingDto().getServicePetDto().getPetShopDto().getNome());
-        corpo += String.format("%-40.40s", dto.getAssignmentServiceEmployeeSchedulingDto().getServicePetDto().getPetShopDto().getCnpj());
-        corpo += String.format("%-40.40s", dto.getDateScheduling());
-        corpo += String.format("%-40.40s", dto.getAssignmentServiceEmployeeSchedulingDto().getEmployeeDto().getAuthUserDto().getName());
-        corpo += String.format("%-40.40s", dto.getAssignmentServiceEmployeeSchedulingDto().getServicePetDto().getPrice());
+        String corpo = "Comprovonate";
+        corpo += String.format("%-40.40s", "\nNome Client: " + dto.getPetDto().getAuthUserDto().getName());
+        corpo += String.format("%-40.40s", "\nCpf: " + dto.getPetDto().getAuthUserDto().getCpf());
+        corpo += String.format("%-40.40s", "\nNome Pet: "+ dto.getPetDto().getName());
+        corpo += String.format("%-40.40s", "\nPetShop: " + dto.getAssignmentServiceEmployeeSchedulingDto().getServicePetDto().getPetShopDto().getNome());
+        corpo += String.format("%-40.40s", "\nCnpj: " + dto.getAssignmentServiceEmployeeSchedulingDto().getServicePetDto().getPetShopDto().getCnpj());
+        corpo += String.format("%-40.40s", "\nData/Hora: " + dto.getDateScheduling());
+        corpo += String.format("%-40.40s", "\nNome Funcionario: " + dto.getAssignmentServiceEmployeeSchedulingDto().getEmployeeDto().getAuthUserDto().getName());
+        corpo += String.format("%-40.40s", "\nPreço: R$" + dto.getAssignmentServiceEmployeeSchedulingDto().getServicePetDto().getPrice());
 
         gravaRegistro(corpo, nomeArq);
 
