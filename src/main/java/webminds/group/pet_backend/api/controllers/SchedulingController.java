@@ -133,36 +133,21 @@ public class SchedulingController {
 
     public void gravaArquivoTxt(Long id) {
         SchedulingDto dto = SchedulingMapper.of(this.schedulingService.getById(id).get());
-        int contaRegDados = 0;
-
-        // Monta o registro de header
-        String header = "00NOTA20232";
-        header += LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-        header += "01";
 
         String nomeArq = "comprovante.txt";
 
-        // Grava o registro de header
-        gravaRegistro(header, nomeArq);
-
-        // Grava os registros de dados (ou registros de corpo)
-
-        String corpo = "02";
-        corpo += String.format("%-10.10s", dto.getAssignmentServiceEmployeeSchedulingDto().getServicePetDto().getPetShopDto().getNome());
-        corpo += String.format("%-8.8s", dto.getDateScheduling());
-        corpo += String.format("%-50.50s", dto.getAssignmentServiceEmployeeSchedulingDto().getEmployeeDto().getAuthUserDto().getName());
+        String corpo = "";
+        corpo += String.format("%-40.40s", dto.getPetDto().getAuthUserDto().getName());
+        corpo += String.format("%-40.40s", dto.getPetDto().getAuthUserDto().getCpf());
+        corpo += String.format("%-40.40s", dto.getPetDto().getName());
+        corpo += String.format("%-40.40s", dto.getAssignmentServiceEmployeeSchedulingDto().getServicePetDto().getPetShopDto().getNome());
+        corpo += String.format("%-40.40s", dto.getAssignmentServiceEmployeeSchedulingDto().getServicePetDto().getPetShopDto().getCnpj());
+        corpo += String.format("%-40.40s", dto.getDateScheduling());
+        corpo += String.format("%-40.40s", dto.getAssignmentServiceEmployeeSchedulingDto().getEmployeeDto().getAuthUserDto().getName());
         corpo += String.format("%-40.40s", dto.getAssignmentServiceEmployeeSchedulingDto().getServicePetDto().getPrice());
-        // Grava o registro de corpo
+
         gravaRegistro(corpo, nomeArq);
-        // Incrementa o contador de registros de dados gravados
-        contaRegDados++;
 
-
-        // Monta e grava o registro de trailer
-        String trailer = "01";
-        trailer += String.format("%010d", contaRegDados);
-
-        gravaRegistro(trailer, nomeArq);
     }
 
 }
