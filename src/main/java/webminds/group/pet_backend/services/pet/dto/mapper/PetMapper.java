@@ -29,6 +29,7 @@ public class PetMapper {
 
     public static PetDto of(Pet pet){
         PetDto dto = new PetDto();
+        dto.setId(pet.getId());
         dto.setName(pet.getName());
         dto.setTypePet(pet.getTypePet());
         dto.setRace(pet.getRace());

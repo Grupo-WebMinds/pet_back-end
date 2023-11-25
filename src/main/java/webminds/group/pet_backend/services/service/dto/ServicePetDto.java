@@ -10,9 +10,11 @@ import webminds.group.pet_backend.services.petShop.dto.PetShopDto;
 @NoArgsConstructor
 public class ServicePetDto {
 
+    private Long id;
     private String name;
     private Short size;
     private Double price;
+    private Short typeService;
     private PetShopDto petShopDto;
 
 }

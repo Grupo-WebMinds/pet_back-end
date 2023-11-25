@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PetShopDto {
 
+    private Long id;
     private String nome;
     private String cnpj;
     private String cep;

@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class PetDto {
 
+    private Long id;
     private String name;
     private String typePet;
     private String race;

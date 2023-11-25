@@ -24,6 +24,9 @@ public class ServicePetService {
         return servicePetRepository.findById(id);
     }
 
+    public List<ServicePet> getByPetShop(Long id, Short size){
+        return servicePetRepository.findBySizeAndPetShopId(size, id);
+    }
 
     public List<ServicePet> get(){
         return servicePetRepository.findAll();
