@@ -7,6 +7,7 @@ import org.springframework.web.server.ResponseStatusException;
 import webminds.group.pet_backend.domain.service.AssignmentServiceEmployee;
 import webminds.group.pet_backend.domain.service.repositories.AssignmentServiceEmployeeRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,6 +41,10 @@ public class AssignmentServiceEmployeeService {
 
     public Optional<AssignmentServiceEmployee> getById(Long id){
         return assignmentServiceEmployeeRepository.findById(id);
+    }
+
+    public List<AssignmentServiceEmployee> getByService(Long id){
+        return assignmentServiceEmployeeRepository.findByServicePetId(id);
     }
 
 }

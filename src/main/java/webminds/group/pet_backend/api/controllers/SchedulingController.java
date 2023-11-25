@@ -48,6 +48,17 @@ public class SchedulingController {
         return ResponseEntity.ok().body(SchedulingMapper.of(item.get()));
     }
 
+    @GetMapping("/client/{idClient}")
+    private ResponseEntity<List<SchedulingDto>> getByAuthUser(@PathVariable Long idClient){
+        List<Scheduling> schedulings = schedulingService.getByAuthUser(idClient);
+
+        if (schedulings.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok().body(schedulings.stream().map(SchedulingMapper::of).toList());
+    }
+
     @PostMapping
     private ResponseEntity<Void> create(@RequestBody @Valid SchedulingCreationDto schedulingCreationDto){
 
