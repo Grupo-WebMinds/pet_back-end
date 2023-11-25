@@ -1,4 +1,4 @@
-package webminds.group.pet_backend.api.list;
+package webminds.group.pet_backend.utils.list;
 import webminds.group.pet_backend.services.scheduling.dto.SchedulingDto;
 import webminds.group.pet_backend.utils.ListaObj;
 import java.io.FileWriter;

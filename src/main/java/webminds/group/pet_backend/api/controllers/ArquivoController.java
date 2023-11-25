@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import webminds.group.pet_backend.api.list.ListScheduling;
+import webminds.group.pet_backend.utils.list.ListScheduling;
 import webminds.group.pet_backend.domain.scheduling.Scheduling;
 import webminds.group.pet_backend.services.scheduling.SchedulingService;
 import webminds.group.pet_backend.services.scheduling.dto.SchedulingDto;
@@ -84,6 +84,26 @@ public class ArquivoController {
             return ResponseEntity.status(200)
                     .header("Content-Disposition",
                             "attachment; filename=agendamento.csv")
+                    .body(fileInputStream.readAllBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(422, "Diretório não encontrado", null);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(422, "Não foi possível converter para byte[]", null);
+        }
+    }
+
+    @GetMapping("/download-txt")
+    public ResponseEntity<byte[]> downloadTxt() {
+
+        File file = this.diretorioBase.resolve("comprovante.txt").toFile();
+        try {
+            InputStream fileInputStream = new FileInputStream(file);
+
+            return ResponseEntity.status(200)
+                    .header("Content-Disposition",
+                            "attachment; filename=comprovante.txt")
                     .body(fileInputStream.readAllBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
