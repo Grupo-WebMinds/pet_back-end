@@ -21,6 +21,7 @@ public class ServicePetMapper {
 
     public static ServicePetDto of(ServicePet servicePet){
         ServicePetDto dto = new ServicePetDto();
+        dto.setId(servicePet.getId());
         dto.setName(servicePet.getName());
         dto.setSize(servicePet.getSize());
         dto.setPrice(servicePet.getPrice());

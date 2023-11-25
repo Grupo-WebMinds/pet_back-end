@@ -25,6 +25,7 @@ public class PetShopMapper {
 
    public static PetShopDto ofDto(PetShop petShop){
        PetShopDto pet = new PetShopDto();
+       pet.setId(petShop.getId());
        pet.setNome(petShop.getNome());
        pet.setCnpj(petShop.getCnpj());
        pet.setCep(petShop.getCep());
