@@ -13,12 +13,12 @@ import webminds.group.pet_backend.services.scheduling.dto.SchedulingCreationDto;
 import webminds.group.pet_backend.services.scheduling.dto.SchedulingDto;
 import webminds.group.pet_backend.services.scheduling.dto.mapper.SchedulingMapper;
 import webminds.group.pet_backend.services.service.AssignmentServiceEmployeeService;
+import webminds.group.pet_backend.utils.list.FilaObj;
+import webminds.group.pet_backend.utils.list.PilhaObj;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +40,40 @@ public class SchedulingController {
         }
 
         return ResponseEntity.ok(all.stream().map(SchedulingMapper::of).toList());
+    }
+
+    @GetMapping("/fila")
+    private ResponseEntity<FilaObj> getFila() {
+        List<Scheduling> all = schedulingService.get();
+
+        if (all.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        List<SchedulingDto> list = all.stream().map(SchedulingMapper::of).toList();
+
+        FilaObj filaObj = new FilaObj(list.size());
+
+        list.forEach(filaObj::insert);
+
+        return  ResponseEntity.ok(filaObj);
+    }
+
+    @GetMapping("/pilha")
+    private ResponseEntity<PilhaObj> getPilha() {
+        List<Scheduling> all = schedulingService.get();
+
+        if (all.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        List<SchedulingDto> list = all.stream().map(SchedulingMapper::of).toList();
+
+        PilhaObj pilhaObj = new PilhaObj(list.size());
+
+        list.forEach(pilhaObj::push);
+
+        return  ResponseEntity.ok().body(pilhaObj);
     }
 
     @GetMapping("/{id}")
