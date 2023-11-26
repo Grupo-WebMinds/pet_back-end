@@ -19,6 +19,7 @@ import webminds.group.pet_backend.utils.list.PilhaObj;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public class SchedulingController {
     }
 
     @GetMapping("/fila")
-    private ResponseEntity<FilaObj> getFila() {
+    private ResponseEntity<List<Object>> getFila() {
         List<Scheduling> all = schedulingService.get();
 
         if (all.isEmpty()) {
@@ -52,15 +53,21 @@ public class SchedulingController {
 
         List<SchedulingDto> list = all.stream().map(SchedulingMapper::of).toList();
 
-        FilaObj filaObj = new FilaObj(list.size());
+        int tamanho = list.size();
+        FilaObj filaObj = new FilaObj(tamanho);
 
         list.forEach(filaObj::insert);
 
-        return  ResponseEntity.ok(filaObj);
+        List<Object> listFila = new ArrayList<>();
+        for (int i = 0; i < tamanho; i++){
+            listFila.add(filaObj.poll());
+        }
+
+        return  ResponseEntity.ok(listFila);
     }
 
     @GetMapping("/pilha")
-    private ResponseEntity<PilhaObj> getPilha() {
+    private ResponseEntity<List<Object>> getPilha() {
         List<Scheduling> all = schedulingService.get();
 
         if (all.isEmpty()) {
@@ -73,7 +80,15 @@ public class SchedulingController {
 
         list.forEach(pilhaObj::push);
 
-        return  ResponseEntity.ok().body(pilhaObj);
+        List<Object> pilha = new ArrayList<>();
+
+        int topo = pilhaObj.getTopo() + 1;
+
+        for (int i = 0; i < topo; i++){
+            pilha.add(pilhaObj.pop());
+        }
+
+        return  ResponseEntity.ok().body(pilha);
     }
 
     @GetMapping("/{id}")
