@@ -43,6 +43,11 @@ public class PilhaObj<T> {
             }
         }
     }
+
+    public T[] getPilha(){
+        return pilha;
+    }
+
     public int getTopo() {
         return topo;
     }

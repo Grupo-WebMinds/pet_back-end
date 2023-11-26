@@ -19,8 +19,6 @@ import webminds.group.pet_backend.utils.list.PilhaObj;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +54,7 @@ public class SchedulingController {
 
         FilaObj filaObj = new FilaObj(list.size());
 
-        filaObj.insert(list);
+        list.forEach(filaObj::insert);
 
         return  ResponseEntity.ok(filaObj);
     }
@@ -73,9 +71,9 @@ public class SchedulingController {
 
         PilhaObj pilhaObj = new PilhaObj(list.size());
 
-        pilhaObj.push(list);
+        list.forEach(pilhaObj::push);
 
-        return  ResponseEntity.ok(pilhaObj);
+        return  ResponseEntity.ok().body(pilhaObj);
     }
 
     @GetMapping("/{id}")
