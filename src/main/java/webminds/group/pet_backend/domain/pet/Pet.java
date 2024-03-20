@@ -1,13 +1,22 @@
 package webminds.group.pet_backend.domain.pet;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import webminds.group.pet_backend.domain.scheduling.Scheduling;
+import webminds.group.pet_backend.domain.user.AuthUser;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Pet {
 
     @Id
@@ -15,50 +24,18 @@ public class Pet {
     private Long id;
 
     private String name;
+    private String typePet;
+    private String race;
+    private Double weight;
+    private Short size;
+    private Short gender;
+    private LocalDate dateBirth;
+    private LocalDateTime dateCreation;
 
-    private LocalDate birthDate;
+    @ManyToOne
+    private AuthUser authUser;
 
-    private String gender;
+    @OneToMany(mappedBy = "pet")
+    private List<Scheduling> listScheduling;
 
-    private String size;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
 }

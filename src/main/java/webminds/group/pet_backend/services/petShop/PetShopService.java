@@ -1,62 +1,73 @@
 package webminds.group.pet_backend.services.petShop;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import webminds.group.pet_backend.domain.petShop.PetShop;
 import webminds.group.pet_backend.domain.petShop.repositories.PetShopRepository;
-import webminds.group.pet_backend.services.petShop.dto.PetShopCreationDto;
-import webminds.group.pet_backend.services.petShop.dto.PetShopDto;
-import webminds.group.pet_backend.services.petShop.dto.PetShopMapper;
+import webminds.group.pet_backend.domain.user.AuthUser;
+import webminds.group.pet_backend.exception.ConflictCreateException;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PetShopService {
 
-    @Autowired
-    private PetShopRepository petShopRepository;
+    private final PetShopRepository petShopRepository;
 
-    public PetShopDto create(PetShopCreationDto petShopCreationDto){
-        final PetShop newPetShop = PetShopMapper.of(petShopCreationDto);
+    public PetShop create(PetShop petShop){
 
-        return PetShopMapper.ofDto(this.petShopRepository.save(newPetShop));
-    }
+        boolean exist = petShopRepository.existsByCnpj(petShop.getCnpj());
 
-    public List<PetShopDto> get(){
-        List<PetShop> petShops = this.petShopRepository.findAll();
-
-        return petShops.stream().map(PetShopMapper::ofDto).toList();
-    }
-
-    public PetShopDto getById(Long id){
-        Optional<PetShop> petShopOpt = this.petShopRepository.findById(id);
-        if (petShopOpt.isEmpty()){
-            return null;
+        if(exist){
+            throw new ConflictCreateException("petShop", petShop.getCnpj());
         }
 
-        PetShop petShop = petShopOpt.get();
-        return PetShopMapper.ofDto(petShop);
+        return petShopRepository.save(petShop);
+    }
+
+    public PetShop update(PetShop petShop, Long id){
+        Optional<PetShop> ps = petShopRepository.findById(id);
+
+        if (ps.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+        }
+
+        boolean exist = petShopRepository.existsByCnpj(petShop.getCnpj());
+
+        if(exist && !ps.get().getCnpj().equals(petShop.getCnpj())){
+            throw new ConflictCreateException("petShop", petShop.getCnpj());
+        }
+
+        petShop.setId(id);
+        return petShopRepository.save(petShop);
 
     }
 
-    public boolean delete(Long id){
-        boolean exist = this.petShopRepository.existsById(id);
-        if (exist){
-            this.petShopRepository.deleteById(id);
-        }
-        return exist;
+    public List<PetShop> get(){
+        return petShopRepository.findAll();
     }
 
-    public PetShopDto update(PetShopCreationDto petShopCreationDto, Long id){
-        boolean exist = this.petShopRepository.existsById(id);
-        if (exist){
-            PetShop petShop = PetShopMapper.of(petShopCreationDto);
-            petShop.setId(id);
-            petShopRepository.save(petShop);
-            return PetShopMapper.ofDto(petShop);
+    public Optional<PetShop> getById(Long id){
+        return petShopRepository.findById(id);
+    }
+
+    public Optional<PetShop> getByUser(Long id){
+        return petShopRepository.findByAuthUserId(id);
+    }
+
+    public void delete(Long id){
+        boolean exist = petShopRepository.existsById(id);
+        if(!exist){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return null;
+
+        petShopRepository.deleteById(id);
+
     }
 
 }

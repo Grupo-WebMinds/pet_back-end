@@ -13,7 +13,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import webminds.group.pet_backend.api.configuration.security.jwt.ManagerTokenJwt;
-import webminds.group.pet_backend.services.authUser.authentication.AuthenticationUserService;
+import webminds.group.pet_backend.services.user.authentication.AuthenticationUserService;
 
 import java.io.IOException;
 import java.util.Objects;
