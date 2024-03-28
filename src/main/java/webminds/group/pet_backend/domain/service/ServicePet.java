@@ -28,7 +28,7 @@ public class ServicePet {
     @ManyToOne
     private PetShop petShop;
 
-//    @OneToMany(mappedBy = "service")
-//    private List<AssignmentServiceEmployee> assignmentServiceEmployees;
+    @ManyToOne
+    private SchedulingHasServicePet schedulingHasServicePet;
 
 }

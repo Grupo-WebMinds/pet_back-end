@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AssignmentServiceEmployee {
+public class SchedulingHasServicePet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,13 +25,15 @@ public class AssignmentServiceEmployee {
     @ManyToOne
     private ServicePet servicePet;
 
-
     @ManyToOne
     private Employee employee;
 
     private LocalTime timeWork;
 
-    @OneToMany(mappedBy = "assignmentServiceEmployee")
+    @OneToMany(mappedBy = "schedulingHasServicePet")
     private List<Scheduling> listScheduling;
+
+    @OneToMany(mappedBy = "schedulingHasServicePet")
+    private List<ServicePet> listService;
 
 }

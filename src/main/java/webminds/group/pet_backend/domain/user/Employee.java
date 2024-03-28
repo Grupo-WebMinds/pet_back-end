@@ -5,15 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-//import webminds.group.pet_backend.domain.closed.ClosedDaysEmployee;
-//import webminds.group.pet_backend.domain.closed.ClosedDaysPetShop;
-//import webminds.group.pet_backend.domain.closed.ClosedWeekEmployee;
 import webminds.group.pet_backend.domain.petShop.PetShop;
-import webminds.group.pet_backend.domain.service.AssignmentServiceEmployee;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 
 @Entity
 @Getter

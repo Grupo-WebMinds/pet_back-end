@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import webminds.group.pet_backend.domain.scheduling.Scheduling;
 import webminds.group.pet_backend.domain.scheduling.repositories.SchedulingRepository;
-import webminds.group.pet_backend.domain.service.AssignmentServiceEmployee;
 
 import java.util.List;
 import java.util.Optional;

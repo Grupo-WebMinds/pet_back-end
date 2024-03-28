@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import webminds.group.pet_backend.domain.pet.Pet;
-import webminds.group.pet_backend.domain.service.AssignmentServiceEmployee;
 
 import java.time.LocalDateTime;
 
@@ -26,6 +25,4 @@ public class Scheduling {
     @ManyToOne
     private Pet pet;
 
-    @ManyToOne
-    private AssignmentServiceEmployee assignmentServiceEmployee;
 }

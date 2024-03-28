@@ -6,13 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import webminds.group.pet_backend.domain.pet.Pet;
 import webminds.group.pet_backend.domain.scheduling.Scheduling;
-import webminds.group.pet_backend.domain.service.AssignmentServiceEmployee;
 import webminds.group.pet_backend.services.pet.PetService;
 import webminds.group.pet_backend.services.scheduling.SchedulingService;
 import webminds.group.pet_backend.services.scheduling.dto.SchedulingCreationDto;
 import webminds.group.pet_backend.services.scheduling.dto.SchedulingDto;
 import webminds.group.pet_backend.services.scheduling.dto.mapper.SchedulingMapper;
-import webminds.group.pet_backend.services.service.AssignmentServiceEmployeeService;
 import webminds.group.pet_backend.utils.list.FilaObj;
 import webminds.group.pet_backend.utils.list.PilhaObj;
 
@@ -29,7 +27,6 @@ import java.util.Optional;
 public class SchedulingController {
 
     private final PetService petService;
-    private final AssignmentServiceEmployeeService assignmentServiceEmployeeService;
     private final SchedulingService schedulingService;
 
     @GetMapping
@@ -66,7 +63,7 @@ public class SchedulingController {
         return  ResponseEntity.ok(listFila);
     }
 
-    @GetMapping("/pilha")
+    @GetMapping("/pilha") 
     private ResponseEntity<List<Object>> getPilha() {
         List<Scheduling> all = schedulingService.get();
 
@@ -122,15 +119,15 @@ public class SchedulingController {
             return ResponseEntity.noContent().build();
         }
 
-        Optional<AssignmentServiceEmployee> assignmentServiceEmployee = assignmentServiceEmployeeService.getById(schedulingCreationDto.getIdAssignment());
+//        Optional<AssignmentServiceEmployee> assignmentServiceEmployee = assignmentServiceEmployeeService.getById(schedulingCreationDto.getIdAssignment());
 
-        if (assignmentServiceEmployee.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
+//        if (assignmentServiceEmployee.isEmpty()) {
+//            return ResponseEntity.noContent().build();
+//        }
+//
+//        Scheduling scheduling = schedulingService.create(SchedulingMapper.ofCreation(schedulingCreationDto, pet.get(), assignmentServiceEmployee.get()));
 
-        Scheduling scheduling = schedulingService.create(SchedulingMapper.ofCreation(schedulingCreationDto, pet.get(), assignmentServiceEmployee.get()));
-
-        gravaArquivoTxt(scheduling.getId());
+//        gravaArquivoTxt(scheduling.getId());
 
         return ResponseEntity.created(null).build();
     }
@@ -143,13 +140,13 @@ public class SchedulingController {
             return ResponseEntity.noContent().build();
         }
 
-        Optional<AssignmentServiceEmployee> assignmentServiceEmployee = assignmentServiceEmployeeService.getById(schedulingCreationDto.getIdAssignment());
+//        Optional<AssignmentServiceEmployee> assignmentServiceEmployee = assignmentServiceEmployeeService.getById(schedulingCreationDto.getIdAssignment());
 
-        if (assignmentServiceEmployee.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-
-        schedulingService.update(SchedulingMapper.ofCreation(schedulingCreationDto, pet.get(), assignmentServiceEmployee.get()), id);
+//        if (assignmentServiceEmployee.isEmpty()) {
+//            return ResponseEntity.noContent().build();
+//        }
+//
+//        schedulingService.update(SchedulingMapper.ofCreation(schedulingCreationDto, pet.get(), assignmentServiceEmployee.get()), id);
 
         return ResponseEntity.ok().build();
     }
