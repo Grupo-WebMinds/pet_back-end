@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/servicos")
+@RequestMapping("/api/servicos")
 public class ServiceController {
 
     private final PetShopService petShopService;

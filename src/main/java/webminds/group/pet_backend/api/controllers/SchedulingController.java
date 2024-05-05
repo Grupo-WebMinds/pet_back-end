@@ -25,7 +25,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/agendamentos")
+@RequestMapping("/api/agendamentos")
 public class SchedulingController {
 
     private final PetService petService;
@@ -178,6 +178,11 @@ public class SchedulingController {
             System.out.println("Erro ao gravar o arquivo");
             erro.printStackTrace();
         }
+    }
+
+    @GetMapping("/dono-dados/{id}")
+    private ResponseEntity<Object> test(@PathVariable Long id){
+        return ResponseEntity.ok().body(schedulingService.getDadosDono(id));
     }
 
     public void gravaArquivoTxt(Long id) {
