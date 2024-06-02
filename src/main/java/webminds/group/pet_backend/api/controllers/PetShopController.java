@@ -50,6 +50,17 @@ public class PetShopController {
         return ResponseEntity.ok().body(PetShopMapper.ofDto(item.get()));
     }
 
+    @GetMapping("/dono/{id}")
+    private ResponseEntity<PetShopDto> getByDono(@PathVariable Long id){
+        Optional<PetShop> item = petShopService.getByUser(id);
+
+        if (item.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok().body(PetShopMapper.ofDto(item.get()));
+    }
+
 
     @PostMapping("/{idOwner}")
     public ResponseEntity<Void> create(@RequestBody @Valid PetShopCreationDto petShopCreationDto, @PathVariable Long idOwner){
@@ -80,10 +91,7 @@ public class PetShopController {
         }
 
         Optional<PetShop> petShop = this.petShopService.getByUser(idOwner);
-
-        if (petShop.isPresent()){
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
+            
 
         this.petShopService.update(PetShopMapper.ofCreation(petShopCreationDto, user.get()), id);
         return ResponseEntity.ok().build();
