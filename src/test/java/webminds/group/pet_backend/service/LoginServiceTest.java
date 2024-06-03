@@ -23,6 +23,7 @@ public class LoginServiceTest {
         // Simulação de requisição HTTP com código 200
         int codigoHTTP = fazerRequisicaoHTTP(email, senha);
 
+
         // Verificação do código HTTP retornado
         assertEquals(200, codigoHTTP, "A requisição HTTP retornou o código 200 OK.");
     }
