@@ -54,4 +54,8 @@ public class SchedulingService {
         return schedulingRepository.findAllByPetAuthUserId(id);
     }
 
+    public Object getDadosDono(Long id){
+        return schedulingRepository.getDadosDono(id);
+    }
+
 }

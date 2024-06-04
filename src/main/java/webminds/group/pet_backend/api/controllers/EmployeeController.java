@@ -2,6 +2,7 @@ package webminds.group.pet_backend.api.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import webminds.group.pet_backend.domain.petShop.PetShop;
@@ -19,14 +20,19 @@ import webminds.group.pet_backend.services.user.client.UserService;
 import webminds.group.pet_backend.services.user.employee.EmployeeService;
 import webminds.group.pet_backend.services.user.employee.dto.EmployeeDto;
 import webminds.group.pet_backend.services.user.employee.dto.EmployeeUserAuthCreationDto;
+import webminds.group.pet_backend.services.user.employee.dto.ScheduledTime;
 import webminds.group.pet_backend.services.user.employee.dto.mapper.EmployeeMapper;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/funcionarios")
+@RequestMapping("/api/funcionarios")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -147,6 +153,13 @@ public class EmployeeController {
     private ResponseEntity<Void> delete(@PathVariable Long id){
         employeeService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/horarios-agendados/{id}")
+    private ResponseEntity<List<ScheduledTime>> getTest(@PathVariable Long id, @RequestParam String date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateForm = LocalDate.parse(date, formatter);
+       return ResponseEntity.ok().body(employeeService.getTest(id, dateForm));
     }
 
 }

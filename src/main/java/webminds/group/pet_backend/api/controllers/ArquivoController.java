@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/arquivos")
+@RequestMapping("/api/arquivos")
 public class ArquivoController {
 
     private Path diretorioBase = Path.of(System.getProperty("user.dir")); // projeto

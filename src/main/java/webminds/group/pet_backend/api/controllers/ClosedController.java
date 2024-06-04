@@ -17,7 +17,7 @@
 //
 //@RestController
 //@RequiredArgsConstructor
-//@RequestMapping("/closed")
+//@RequestMapping("/api/closed")
 //public class ClosedController {
 //
 //    private final PetShopService petShopService;

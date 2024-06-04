@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/pet-shop")
+@RequestMapping("/api/pet-shop")
 public class PetShopController {
 
     private final PetShopService petShopService;
@@ -42,6 +42,17 @@ public class PetShopController {
     @GetMapping("/{id}")
     private ResponseEntity<PetShopDto> getById(@PathVariable Long id){
         Optional<PetShop> item = petShopService.getById(id);
+
+        if (item.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok().body(PetShopMapper.ofDto(item.get()));
+    }
+
+    @GetMapping("/dono/{id}")
+    private ResponseEntity<PetShopDto> getByDono(@PathVariable Long id){
+        Optional<PetShop> item = petShopService.getByUser(id);
 
         if (item.isEmpty()){
             return ResponseEntity.noContent().build();
@@ -80,10 +91,7 @@ public class PetShopController {
         }
 
         Optional<PetShop> petShop = this.petShopService.getByUser(idOwner);
-
-        if (petShop.isPresent()){
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
+            
 
         this.petShopService.update(PetShopMapper.ofCreation(petShopCreationDto, user.get()), id);
         return ResponseEntity.ok().build();

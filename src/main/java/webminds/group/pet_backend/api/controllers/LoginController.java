@@ -12,7 +12,7 @@ import webminds.group.pet_backend.services.user.authentication.dto.AuthUserToken
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/login")
+@RequestMapping("/api/login")
 public class LoginController {
 
     private final UserService userService;
