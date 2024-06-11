@@ -29,6 +29,10 @@ public class PetService {
         return this.petRepository.findById(id);
     }
 
+    public List<Pet> getByUser(Long id){
+        return this.petRepository.findAllByAuthUserId(id);
+    }
+
     public Pet update(Pet pet, Long id){
         boolean exist = petRepository.existsById(id);
         if(!exist){

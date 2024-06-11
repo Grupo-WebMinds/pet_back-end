@@ -36,6 +36,24 @@ public class PetController {
         return ResponseEntity.ok(all.stream().map(PetMapper::of).toList());
     }
 
+    @GetMapping("/user/{id}")
+    private ResponseEntity<List<PetDto>> getByUser(@PathVariable Long id) {
+
+        Optional<AuthUser> user = this.userService.getById(id);
+
+        if (user.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        List<Pet> all = petService.getByUser(id);
+
+        if (all.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(all.stream().map(PetMapper::of).toList());
+    }
+
     @GetMapping("/{id}")
     private ResponseEntity<PetDto> getById(@PathVariable Long id){
         Optional<Pet> item = petService.getById(id);
